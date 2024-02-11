@@ -53,7 +53,7 @@ const Page = () => {
                             <td>{a.name}</td>
                             <td>{a.email}</td>
                             <td>{a.detail.phone}</td>
-                            <td>{`${a.detail.province} ,${a.detail.city} ,${a.detail.detail_address}`}</td>
+                            <td>{`${a.detail.province}, ${a.detail.city}, ${a.detail.detail_address}`}</td>
                             <td>
                                 <img className="rounded w-28" src={`${Endpoint.CUSTOMERIMAGE}${a.detail.photo}`} />    
                             </td>

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect, useTransition } from "react";
 import Endpoint from "@/app/constant/constant";
+import { PencilIcon, TrashIcon } from '@heroicons/react/outline';
 
 const Page = () => {
     const [ product, setProduct ] = useState([]);
@@ -36,35 +37,34 @@ const Page = () => {
     }
 
     const handleDelete = (id) => {  
-        setPending(true);  
-        const postData = {
-            id: id,
-        };
-        axios.post(Endpoint.BASE_URL + Endpoint.DELETEPRODUCT, postData,
-            {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            }
-        )
-        .then((response) => {
-            // Tangani respons dari server di sini
-            console.log('Response dari server:', response.data);
-            // refreshData();
-            startTransition(router.refresh);
-            setPending(false);
-        })
-        .catch((error) => {
-            // Tangani error jika request gagal
-            console.error('Error:', error);
-        });
-      };
-
+        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus produk ini?");
+        if (confirmDelete) {
+            setPending(true);  
+            const postData = {
+                id: id,
+            };
+            axios.post(Endpoint.BASE_URL + Endpoint.DELETEPRODUCT, postData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            )
+            .then((response) => {
+                console.log('Response dari server:', response.data);
+                startTransition(router.refresh);
+                setPending(false);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    };
     return(
         <>
             <div className="grid justify-items-stretch mb-3">
-                <Link href={`/dashboard/products/add`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded justify-self-end">Add</Link>
+                <Link href={`/dashboard/products/add`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded justify-self-end">ADD</Link>
             </div>            
             <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -72,7 +72,6 @@ const Page = () => {
                         <th scope="col" className="px-6 py-3">ID</th>
                         <th scope="col" className="px-6 py-3">Nama</th>
                         <th scope="col" className="px-6 py-3">Kategori</th>
-                        <th scope="col" className="px-6 py-3">Deskripsi</th>
                         <th scope="col" className="px-6 py-3">Photo</th>
                         <th scope="col" className="px-6 py-3">Price</th>
                         <th scope="col" className="px-6 py-3">Weight</th>
@@ -87,7 +86,6 @@ const Page = () => {
                             <td scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{a.id}</td>
                             <td>{a.name}</td>
                             <td>{a.category_name}</td>
-                            <td>{a.description}</td>
                             <td>
                                 <img className="rounded w-28" src={`${Endpoint.PRODUCTIMAGE}${a.photo}`} />    
                             </td>
@@ -95,8 +93,12 @@ const Page = () => {
                             <td>{a.weight}</td>
                             <td>{a.stock}</td>
                             <td>
-                                <button onClick={() => handleEdit(a.id)} href={`/dashboard/products`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</button>
-                                <button onClick={() => handleDelete(a.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ms-2">Delete</button>
+                            <button onClick={() => handleEdit(a.id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <PencilIcon className="h-5 w-5" /> {/* Ikon Edit */}
+                            </button>
+                            <button onClick={() => handleDelete(a.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ms-2">
+                                <TrashIcon className="h-5 w-5" /> {/* Ikon Delete */}
+                            </button>
                             </td>
                         </tr>
                     ))}

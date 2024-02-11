@@ -97,7 +97,7 @@ const FormEditOrder = ({id}) => {
             >
             <option value="" disabled defaultValue={false}>Status</option>
             <option value="Dalam Proses" defaultValue={order && order.status === "Dalam Proses" ? true : false}>Dalam Proses</option>
-            <option value="Dikirim" defaultValue={order && order.status === "Dikirim" ? true : false}>Dikirm</option>
+            <option value="Dikirim" defaultValue={order && order.status === "Dikirim" ? true : false}>Dikirim</option>
             <option value="Selesai" defaultValue={order && order.status === "Selesai" ? true : false}>Selesai</option>
             </select>
         </div>
@@ -109,7 +109,7 @@ const FormEditOrder = ({id}) => {
             type="text"
             id="productName"
             className="w-full px-4 py-2 border rounded-lg"
-            value={order && order.pengiriman.resi}
+            value={order && order.resi}
             onChange={(e) => setResi(e.target.value)}
             />
         </div>
