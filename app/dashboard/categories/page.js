@@ -37,7 +37,7 @@ const Page = () => {
     }
 
     const handleDelete = (id) => {  
-        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus kategori ini?");
+        const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus kategori ini? Menghapus kategori akan menghapus produk yang terkait dengannya. Pastikan Anda telah mempertimbangkan tindakan ini dengan baik.");
         if (confirmDelete) {
             setPending(true);  
             const postData = {
@@ -65,14 +65,14 @@ const Page = () => {
     return(
         <>
             <div className="grid justify-items-stretch mb-3">
-                <Link href={`/dashboard/categories/add`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded justify-self-end">ADD</Link>
+                <Link href={`/dashboard/categories/add`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded justify-self-end">Tambah</Link>
             </div>            
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
                         <th scope="col" className="px-6 py-3">ID</th>
                         <th scope="col" className="px-6 py-3">Nama</th>
-                        <th scope="col" className="px-6 py-3">Photo</th>
+                        <th scope="col" className="px-6 py-3">Foto</th>
                         <th scope="col" className="px-6 py-3">Deskripsi</th>
                         <th scope="col" className="px-6 py-3">Aksi</th>
                     </tr>

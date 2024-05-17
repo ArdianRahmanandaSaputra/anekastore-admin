@@ -1,9 +1,13 @@
+"use client"
+import DiscountContextProvider from "@/app/context/DiscountContext"
 import FormProduct from "../../components/formproduct"
 
 const Page = () => {
     return(
         <>
-            <FormProduct />
+            <DiscountContextProvider>
+                <FormProduct />
+            </DiscountContextProvider>
         </>
     )
 }

@@ -98,7 +98,7 @@ const Page = () => {
         {/* Tab "Selesai" */}
         <button
           className={`px-4 py-2 ${
-            activeTab === "completed" ? "bg-blue-500 text-white" : "bg-gray-200"
+            activeTab === "completed" ? "bg-green-500 text-white" : "bg-gray-200"
           } rounded`}
           onClick={() => handleTabChange("completed")}
         >

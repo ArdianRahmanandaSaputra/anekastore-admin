@@ -22,22 +22,25 @@ const Sidebar = () => {
     return(
         <>
             {isLoggedIn || 1 ? (
-                <div className="flex flex-col flex-wrap bg-white border-r px-6 w-64">
+                <div className="flex flex-col flex-wrap bg-white border-r px-6 w-64 h-full">
                     <div className="flex flex-col mt-5">
                         <Link href={`/dashboard/categories`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
-                            Categories
+                            Kategori
                         </Link>
                         <Link href={`/dashboard/products`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
-                            Products
+                            Produk
                         </Link>
                         <Link href={`/dashboard/customer`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
-                            Customers
+                            Pelanggan
                         </Link>
                         <Link href={`/dashboard/order`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
-                            Orders
+                            Pesanan
                         </Link>
                         <Link href={`/dashboard/payment`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
-                            Payments
+                            Pembayaran
+                        </Link>
+                        <Link href={`/dashboard/report`} className='py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
+                            Laporan Penjualan
                         </Link>
                         <button onClick={handleLogout} className='text-start py-3 mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500'>
                             Logout

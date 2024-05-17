@@ -2,13 +2,16 @@
 
 import { useParams } from 'next/navigation';
 import FormEditProduct from "../../components/formeditproduct";
+import DiscountContextProvider from '@/app/context/DiscountContext';
 
 const Page = () => {
     const params = useParams()
     console.log(params.id);
     return(
         <>
-            <FormEditProduct id={params.id}/>
+            <DiscountContextProvider>
+                <FormEditProduct id={params.id}/>
+            </DiscountContextProvider>
         </>
     )
 }

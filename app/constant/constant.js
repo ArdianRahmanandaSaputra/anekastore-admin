@@ -3,6 +3,10 @@ const Endpoint = {
     CATEGORYIMAGE : "http://storeaneka.my.id/uploads/category/",
     PRODUCTIMAGE : "http://storeaneka.my.id/uploads/product/",
     CUSTOMERIMAGE : "http://storeaneka.my.id/uploads/user/",
+    //BASE_URL : "http://127.0.0.1:8000/api",
+    //CATEGORYIMAGE : "http://127.0.0.1:8000/uploads/category/",
+    //PRODUCTIMAGE : "http://127.0.0.1:8000/uploads/product/",
+    //CUSTOMERIMAGE : "http://127.0.0.1:8000/uploads/user/",
     LOGIN : "/login",
     LOGOUT : "/logout",
     CATEGORY : "/category",
@@ -12,6 +16,7 @@ const Endpoint = {
     VIEWCUSTOMER : "/customer-view",
     UPDATECATEGORY : "/category-update",
     PRODUCT : "/product",
+    COUNTPRODUCT: "/product-count",
     SAVEPRODUCT : "/product-save",
     DELETEPRODUCT : "/product-delete",
     VIEWPRODUCT : "/product-view",
@@ -19,9 +24,15 @@ const Endpoint = {
     UPDATEPRODUCT : "/product-update",
     UPDATEORDERSTATUS : "/order-update",
     CUSTOMER : "/customers",
+    COUNTCUSTOMER : "/customer-count",
     PAYMENT : "/payments",
     ORDER : "/orders",
-    CATEGORY : "/category"
+    COUNTORDERBYMONTH: "/order-count-by-month",
+    COUNTORDERBYYEAR: "/order-count-by-year",
+    SUMORDERSBYMONTH: "/orders-sum-by-month",
+    SUMORDERSBYYEAR: "/order-sum-by-year",
+    CATEGORY : "/category",
+    REPORT : "/report"
 }
 
 export default Endpoint;
