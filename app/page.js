@@ -1,5 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation';
+import Page from './login/page';
 
 export default function Home() {
   const router = useRouter();
@@ -7,7 +8,8 @@ export default function Home() {
   return (
     <>
       {
-        router.push('/login')
+        // router.push('/login')
+        <Page />
       }
     </>
   );
