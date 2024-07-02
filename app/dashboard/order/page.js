@@ -15,6 +15,7 @@ const Page = () => {
   const isMutating = isPending || isTransitionStarted;
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("inProcess"); // State untuk mengontrol tab yang aktif
+  const [searchTerm, setSearchTerm] = useState(""); // State untuk menyimpan nilai kotak pencarian
 
   // Fungsi untuk mengubah tab yang aktif
   const handleTabChange = (tab) => {
@@ -63,14 +64,18 @@ const Page = () => {
     return () => clearInterval(pollingInterval);
   }, [token]); 
 
-  // Filter orders based on active tab
+  // Filter orders based on active tab and search term
   const filteredOrders = orders.filter((order) => {
+    const matchesSearchTerm = 
+      order.id.toString().includes(searchTerm.toLowerCase()) || 
+      order.user.name.toLowerCase().includes(searchTerm.toLowerCase());
+    
     if (activeTab === "inProcess") {
-      return order.status === "Dalam Proses";
+      return order.status === "Dalam Proses" && matchesSearchTerm;
     } else if (activeTab === "shipped") {
-      return order.status === "Dikirim";
+      return order.status === "Dikirim" && matchesSearchTerm;
     } else if (activeTab === "completed") {
-      return order.status === "Selesai";
+      return order.status === "Selesai" && matchesSearchTerm;
     }
   });
 
@@ -106,61 +111,71 @@ const Page = () => {
         </button>
       </div>
       <div className="mt-4">
+        {/* Kotak Pencarian */}
+        <div className="flex justify-center mb-4">
+          <input
+            type="text"
+            placeholder="Cari berdasarkan ID Order atau Nama Customer"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="px-4 py-2 border rounded-lg w-1/2"
+          />
+        </div>
         <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              ID
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Customer
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Order Status
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Total
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Payment Status
-            </th>
-            <th scope="col" className="px-6 py-3"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {isMutating ? (
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <td>{"Get Data"}</td>
+              <th scope="col" className="px-6 py-3">
+                ID
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Customer
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Order Status
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Total
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Payment Status
+              </th>
+              <th scope="col" className="px-6 py-3"></th>
             </tr>
-          ) : (
-            filteredOrders.map((order) => (
-              <tr
-                key={order.id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td
-                  scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  {order.id}
-                </td>
-                <td>{order.user.name}</td>
-                <td>{order.status}</td>
-                <td>{order.total}</td>
-                <td>{order.status_pembayaran}</td>
-                <td>
-                  <button
-                    onClick={() => handleEdit(order.id)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                  >
-                    View or Edit
-                  </button>
-                </td>
+          </thead>
+          <tbody>
+            {isMutating ? (
+              <tr>
+                <td>{"Get Data"}</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredOrders.map((order) => (
+                <tr
+                  key={order.id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+                >
+                  <td
+                    scope="row"
+                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    {order.id}
+                  </td>
+                  <td>{order.user.name}</td>
+                  <td>{order.status}</td>
+                  <td>{order.total}</td>
+                  <td>{order.status_pembayaran}</td>
+                  <td>
+                    <button
+                      onClick={() => handleEdit(order.id)}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      View or Edit
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </>
   );

@@ -1,8 +1,8 @@
 const Endpoint = {
-    BASE_URL : "https://storeaneka.my.id/api",
-    CATEGORYIMAGE : "https://storeaneka.my.id/uploads/category/",
-    PRODUCTIMAGE : "https://storeaneka.my.id/uploads/product/",
-    CUSTOMERIMAGE : "https://storeaneka.my.id/uploads/user/",
+    BASE_URL : "http://storeaneka.my.id/api",
+    CATEGORYIMAGE : "http://storeaneka.my.id/uploads/category/",
+    PRODUCTIMAGE : "http://storeaneka.my.id/uploads/product/",
+    CUSTOMERIMAGE : "http://storeaneka.my.id/uploads/user/",
     //BASE_URL : "http://127.0.0.1:8000/api",
     //CATEGORYIMAGE : "http://127.0.0.1:8000/uploads/category/",
     //PRODUCTIMAGE : "http://127.0.0.1:8000/uploads/product/",

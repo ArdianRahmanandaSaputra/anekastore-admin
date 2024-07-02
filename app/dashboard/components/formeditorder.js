@@ -28,6 +28,20 @@ const FormEditOrder = ({ id }) => {
       .catch((error) => {
         console.error("Gagal melakukan permintaan:", error);
       });
+
+    // Add event listener for backspace key
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        router.replace("/dashboard/order");
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener when the component is unmounted
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -56,6 +70,8 @@ const FormEditOrder = ({ id }) => {
       });
   };
 
+  
+  
   return (
     <form onSubmit={handleSubmit} className="max-w w-full">
       <div className="mb-4">
@@ -147,10 +163,11 @@ const FormEditOrder = ({ id }) => {
       </div>
       <div className="mb-4">
         <label className="block mb-2 text-gray-800" htmlFor="productName">
-          Total
+          Total Barang
         </label>
         <p className="w-full px-4 py-2 border rounded-lg">
-          {order && order.total}
+          {/* {order && order.total} */}
+          {order && order.total - (order.pengiriman ? order.pengiriman.price : 0)}
         </p>
       </div>
       <div className="mb-4">

@@ -158,10 +158,10 @@ const Dashboard = () => {
     
                 const productCount = responses[0].data.product_count;
                 const orderCount = responses[1].data.order_count;
-                const totalRevenue = responses[2].data.total_revenue;
+                const totalRevenue = responses[2].data.net_revenue;
                 const customerCount = responses[3].data.customer_count;
                 const yearlyOrderCount = responses[4].data.order_count;
-                const yearlyTotalRevenue = responses[5].data.total_revenue; 
+                const yearlyTotalRevenue = responses[5].data.net_revenue; 
     
                 setProductCount(productCount);
                 setCustomerCount(customerCount);
